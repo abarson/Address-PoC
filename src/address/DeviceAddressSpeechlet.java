@@ -125,8 +125,9 @@ public class DeviceAddressSpeechlet implements SpeechletV2 {
             // This is the custom intent that delivers the main functionality of the sample skill.
             // Refer to speechAssets/SampleUtterances for examples that would trigger this.
             case "GetAddress":
-                String consentToken = session.getUser().getPermissions().getConsentToken();
-
+            	String consentToken = session.getUser().getPermissions() != null ? 
+            			session.getUser().getPermissions().getConsentToken() : null;
+                
                 if (consentToken == null) {
                     log.info("The user hasn't authorized the skill. Sending a permissions card.");
                     return getPermissionsResponse();
